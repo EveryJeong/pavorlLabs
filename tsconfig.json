@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "noImplicitAny": false, /* any 타입을  허용하지 않는것으로 보인다.. 추가해줌.. */
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,

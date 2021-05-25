@@ -1,0 +1,78 @@
+@mixin media {
+    @media only screen and (max-width: 767px) {
+       @content;
+    }
+ }
+ 
+ @mixin row {
+    &:before,
+    &:after {
+       display: table;
+       content: '';
+    }
+ 
+    &:after {
+       clear: both;
+    }
+ }
+ 
+ @mixin background-retina($name, $size: contain, $repeat: no-repeat, $retina: 2) {
+    $retina-name: str-replace($name, '.png', '@#{$retina}x.png');
+    $retina-name: str-replace($retina-name, '.jpg', '@#{$retina}x.jpg');
+    background-image: url($name);
+    background-image: url($retina-name),none;
+    background-size: $size;
+    background-repeat: $repeat;
+    @content;
+ }
+ 
+ @mixin background-define($sw, $sh, $w, $h, $x, $y, $z) {
+    position: absolute;
+    left: ($x / $sw) * 100%;
+    top: ($y / $sh) * 100%;
+    z-index: $z;
+    width: ($w / $sw) * 100%;
+    height: ($h / $sh) * 100%;
+    @content;
+ }
+ 
+ @mixin ellipsis($lines: 1) {
+    @if ($lines == 1) {
+       overflow: hidden;
+       text-overflow: ellipsis;
+       white-space: nowrap;
+    } @else {
+       display: -webkit-box;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       white-space: normal;
+       -webkit-line-clamp: $lines;
+       -webkit-box-orient: vertical;
+    }
+ }
+ 
+ @function enumerate($list-or-map) {
+    @return zip($list-or-map, range(length($list-or-map)));
+ }
+ 
+ @function str-split($string, $separator) {
+     // empty array/list
+     $split-arr: ();
+     // first index of separator in string
+     $index : str-index($string, $separator);
+     // loop through string
+     @while $index != null {
+         // get the substring from the first character to the separator
+         $item: str-slice($string, 1, $index - 1);
+         // push item to array
+         $split-arr: append($split-arr, $item);
+         // remove item and separator from string
+         $string: str-slice($string, $index + 1);
+         // find new index of separator
+         $index : str-index($string, $separator);
+     }
+     // add the remaining string to list (the last item)
+     $split-arr: append($split-arr, $string);
+ 
+     @return $split-arr;
+ }
