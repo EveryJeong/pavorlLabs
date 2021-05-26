@@ -2,12 +2,15 @@
     <div [ngClass]="cn('@', 'main')">
         <div [ngClass]="cn('@', 'icon')">
             <img src="https://via.placeholder.com/50" alt="">
-            <span class="header-title">Hott</span>
+            <div class="header-title text-test">Hott</div>
         </div>
-        <div [ngClass]="cn('@', 'nav')">
-            <div>
-                
-            </div>
-        </div>
+        <nav >
+            <ul [ngClass]="cn('@', 'nav')">
+                <li><a href="#">Food delivery</a></li>
+                <li><a href="#">How it works</a></li>
+                <li><a href="#">Our cities</a></li>
+                <li><a href="#">Sign up</a></li>
+            </ul>
+        </nav>
     </div>
 </div>
